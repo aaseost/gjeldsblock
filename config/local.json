@@ -1,0 +1,20 @@
+{
+  "subscriptions": [
+    "https://drive.google.com/file/d/1WSIKk3270K9Oc646_ktfT-BzBCrf6MTl",
+    "https://easylist-downloads.adblockplus.org/antiadblockfilters.txt",
+  ],
+  "additional": [
+    "youtube.com##.ad-div"
+  ],
+  "whitelist": [
+    "localhost",
+    "127.0.0.1"
+  ],
+  "referrer": [
+    "||static.cnbetacdn.com^$document,image"
+  ],
+  "redirect": {
+    "IMAGE": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==",
+    "OTHER": "about:blank"
+  }
+}

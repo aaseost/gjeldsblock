@@ -1,0 +1,74 @@
+{
+  "name": "adblock-minus",
+  "version": "1.0.7",
+  "description": "Implements core functionality of adblocking",
+  "main": "bundle.js",
+  "jsnext:main": "module.js",
+  "files": [
+    "bundle.js",
+    "module.js",
+    "lib/*.js"
+  ],
+  "engines": {
+    "node": ">=6.4"
+  },
+  "scripts": {
+    "test": "npm run lint && npm run spec && npm run report",
+    "build": "npm run chrome-vendor && browserify -e chrome/background.js -x url > build/app.js",
+    "prebuild": "npm test && mkdir -p build && npm run chrome-asset",
+    "prepublish": "browserify --node -e module.js -s default > bundle.js",
+    "chrome-asset": "cp chrome/options.* build && mustache package.json manifest.json > build/manifest.json",
+    "chrome-vendor": "browserify -r url > build/vendor.js",
+    "lint": "standard",
+    "lint:fix": "standard --fix",
+    "spec": "NODE_ENV=test nyc -s ava",
+    "spec:watch": "ava --watch",
+    "report": "nyc report",
+    "report:lcov": "nyc report -r=lcov",
+    "report:html": "nyc report -r=html",
+    "coverage": "npm run spec && npm run report"
+  },
+  "keywords": [
+    "adblock",
+    "adblock-plus"
+  ],
+  "author": "xiaody",
+  "license": "GPL-3.0",
+  "repository": "xiaody/adblock-minus",
+  "devDependencies": {
+    "ava": "0.24.0",
+    "babel-plugin-istanbul": "4.1.5",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.26.0",
+    "babelify": "8.0.0",
+    "browserify": "15.1.0",
+    "mustache": "2.3.0",
+    "nyc": "11.4.1",
+    "standard": "10.0.3"
+  },
+  "babel": {
+    "plugins": [
+      "transform-es2015-modules-commonjs"
+    ],
+    "env": {
+      "test": {
+        "plugins": [
+          "istanbul"
+        ]
+      }
+    }
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "ava": {
+    "require": [
+      "babel-register"
+    ]
+  },
+  "nyc": {
+    "sourceMap": false,
+    "instrument": false
+  }
+}
